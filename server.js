@@ -6,14 +6,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Global hidden variable API key
-const API_Key = process.env.APIKEY
+// Inventory API key
+const myAPI_Key = process.env.InventoryAPIKEY
+// Power API Key
+const powerAPI_Key = process.env.Power_API_KEY
+// Sail API Key
+const sailAPI_Key = process.env.Sail_API_KEY
+// Inventory API
+const inventoryYachtAPI = `http://api.boats.com/inventory/search?key=${myAPI_Key}`;
 
-const yachtAPI = `http://api.boats.com/inventory/search?key=${API_Key}`;
+app.get('/inventory' , (req, res) => {
 
-app.get('/' , (req, res) => {
-
-  http.get(yachtAPI, (response) => {
+  http.get(inventoryYachtAPI, (response) => {
     let data = '';
 
     response.on('data', (chunk) => {
